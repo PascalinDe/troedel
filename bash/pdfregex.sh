@@ -63,7 +63,6 @@ fi
 
 FILES="$(find $STARTING_POINT -regex "$STARTING_POINT/$REGEX\.pdf")"
 NUM=$(echo "$FILES" | wc -l)
-echo $NUM;
 
 
 if [ "$NUM" -gt "$MAXIMUM" ]; then
@@ -73,7 +72,7 @@ if [ "$NUM" -gt "$MAXIMUM" ]; then
 fi
 
 
-while read LINE; do
+echo $FILES | while read LINE; do
 	if [ -n "$TOOL" ]; then
 		$TOOL $LINE;
 	else
