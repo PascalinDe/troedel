@@ -67,15 +67,17 @@ NUM=$(echo "$FILES" | wc -l)
 
 if [ "$NUM" -gt "$MAXIMUM" ]; then
 	echo "regex $REGEX matches $NUM/$MAXIMUM files";
-	echo $FILES;
+	echo "$FILES" | while read LINE; do
+		echo -e "$LINE";
+	done
 	exit;
 fi
 
 
-echo $FILES | while read LINE; do
+echo "$FILES" | while read LINE; do
 	if [ -n "$TOOL" ]; then
-		$TOOL $LINE;
+		$TOOL "$LINE";
 	else
-		xdg-open $LINE;
+		xdg-open "$LINE";
 	fi
 done
